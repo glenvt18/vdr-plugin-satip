@@ -42,6 +42,7 @@ private:
   cSatipSectionFilterHandler *pSectionFilterHandlerM;
   cTimeMs createdM;
   cCondVar tunedM;
+  bool isPoweredDownM;
 
   // constructor & destructor
 public:
@@ -116,6 +117,15 @@ public:
   virtual int GetCISlot(void);
   virtual cString GetTnrParameterString(void);
   virtual bool IsIdle(void);
+
+  // power saving
+protected:
+  // Just control idle EPG scanning.
+  // cSatipTuner will disconnect on it's own idle timeout.
+  virtual bool IsPoweredDown(void) {return isPoweredDownM;}
+  virtual void PowerDownMode(bool On) {isPoweredDownM = On;}
+  virtual bool SupportsPowerDown() {return true;}
+
 };
 
 #endif // __SATIP_DEVICE_H

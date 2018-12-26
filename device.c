@@ -25,7 +25,8 @@ cSatipDevice::cSatipDevice(unsigned int indexP)
   deviceNameM(*cString::sprintf("%s %d", *DeviceType(), deviceIndexM)),
   channelM(),
   createdM(0),
-  tunedM()
+  tunedM(),
+  isPoweredDownM(false)
 {
   unsigned int bufsize = (unsigned int)SATIP_BUFFER_SIZE;
   bufsize -= (bufsize % TS_SIZE);
